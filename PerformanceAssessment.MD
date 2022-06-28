@@ -5,10 +5,10 @@
 ### A. Inventory Turns Report
 
 #### A1. Describe the data used for the report.
-#### A2. 
-#### A3.
-#### A4.
-#### A5.
+#### A2. New Tables - details & summary
+#### A3. Specific fields in the detailed and summary sections
+#### A4. Data Transformations - custom functions
+#### A5. Data Triggers - with continual update.
 #### A6. Refresh frequency - What is relevant to stakeholders.
 
 ### B. SQL Code Tables to hold reports
