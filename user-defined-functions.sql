@@ -30,7 +30,7 @@ DECLARE
     Days INT;
 BEGIN
   
-    IF ( month IN (1,3,5,7,8,10,11) ) THEN
+    IF ( month IN (1,3,5,7,8,10,12) ) THEN
         Days := 31;   
     ELSEIF ( month IN (4,6,9,11) ) THEN
         Days := 30;
