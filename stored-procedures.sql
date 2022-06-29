@@ -21,9 +21,9 @@ BEGIN
     IF DId = 0 THEN    
         
         INSERT INTO datefact
-        ( year , month , day)
+        ( fulldate, year , month , day)
         VALUES
-        ( DYear, DMonth, DDay );
+        ( fn_date_from_parts(DYear,DMonth,DDay) , DYear, DMonth, DDay );
        
     END IF;
         
