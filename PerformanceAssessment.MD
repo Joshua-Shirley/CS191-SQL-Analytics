@@ -44,7 +44,7 @@
   ** User Defined Functions **
   
   1. fn_isleapyear(int)
-  2. days_in_month(month)
+  2. fn_daysinmonth(year smallint, month smallint)
 
 #### A5. Data Triggers - with continual update.
 #### A6. Refresh frequency - What is relevant to stakeholders.
