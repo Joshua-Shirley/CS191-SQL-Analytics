@@ -36,7 +36,15 @@
   Rental dates and Payment dates are off by an average of 607 days.
   Either the data was input incorrectly or the video store didn't collect money for a long time, which probably resulted in the shuttering.
 
-
+  * Stored Proceedures *
+  
+  1. insertTime
+  2. insertDate
+  
+  * User Defined Functions *
+  
+  3. fn_isleapyear(int)
+  4. days_in_month(month)
 
 #### A5. Data Triggers - with continual update.
 #### A6. Refresh frequency - What is relevant to stakeholders.
