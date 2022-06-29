@@ -4,29 +4,26 @@
 
 ### A. Month Sales / Average Rental Time / Rental Sales By Category / Rental Time By Category Pivot Table
 
-| Attribute         	| New Entity            	| Explaination                                	|
-|-------------------	|-----------------------	|---------------------------------------------	|
-| Bagel Order ID    	| Order                 	| Primary Key                                 	|
-| Order Date        	| Order                 	| Functionally dependent on Order ID.         	|
-| Delivery Fee      	| Order                 	| Functionally dependent on Order ID          	|
-| Special Notes     	| Order                 	| Functionally dependent on Order ID          	|
-| Customer ID       	| Order                 	| Foreign Key                                 	|
-| Customer ID       	| Customer              	| Primary Key                                 	|
-| First Name        	| Customer              	| Functionally dependent on Customer ID       	|
-| Last Name         	| Customer              	| Functionally dependent on Customer ID       	|
-| Address 1         	| Customer              	| Functionally dependent on Customer ID       	|
-| Address 2         	| Customer              	| Functionally dependent on Customer ID       	|
-| City              	| Customer              	| Functionally dependent on Customer ID       	|
-| State             	| Customer              	| Functionally dependent on Customer ID       	|
-| Zip               	| Customer              	| Functionally dependent on Customer ID       	|
-| Mobile Phone      	| Customer              	| Functionally dependent on Customer ID       	|
-| Bagel Order ID    	| Bagel Order Line Item 	| Primary Key / Foreign Key                   	|
-| Bagel ID          	| Bagel Order Line Item 	| Primary Key / Foreign Key                   	|
-| Bagel Quantity    	| Bagel Order Line Item 	| Partial dependence on Order ID and Bagel ID 	|
-| Bagel ID          	| Bagel                 	| Primary Key                                 	|
-| Bagel Name        	| Bagel                 	| Functional dependence on bagel ID           	|
-| Bagel Description 	| Bagel                 	| Functional dependence on bagel ID           	|
-| Bagel Price       	| Bagel                 	| Functional dependence on bagel ID           	|
+| Month       	| Jan 	| Feb 	| Mar 	| Apr 	| May 	| Jun 	| Jul 	| Aug 	| Sep 	| Oct 	| Nov 	| Dec 	|
+|-------------	|-----	|-----	|-----	|-----	|-----	|-----	|-----	|-----	|-----	|-----	|-----	|-----	|
+| Classics    	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Name        	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Action      	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Animation   	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Children    	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Classics    	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Comedy      	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Documentary 	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Drama       	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Family      	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Foreign     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Games       	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Horror      	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Music       	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| New         	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Sci-Fi      	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Sports      	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
+| Travel      	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|     	|
 
 #### A1. Describe the data used for the report.
 
