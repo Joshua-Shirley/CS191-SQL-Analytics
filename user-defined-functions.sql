@@ -49,8 +49,11 @@ $BODY$;
 ALTER FUNCTION public.fn_daysInMonth(smallint,smallint)
     OWNER TO postgres;
 
-CREATE OR REPLACE FUNCTION public.fn_Date_From_Parts(Year INT, Month INT, Day INT)	
-    RETURNS DATE
+CREATE OR REPLACE FUNCTION public.fn_date_from_parts(
+	year integer,
+	month integer,
+	day integer)
+    RETURNS date
     LANGUAGE 'plpgsql'    
 AS $BODY$
 DECLARE 
@@ -60,15 +63,15 @@ DECLARE
     A INT;
 BEGIN
 
-    Y := RIGHT( ('0000' || Year::TEXT) , 4);
+    Y := Year::TEXT;
     M := RIGHT( ('00' || Month::TEXT) , 2);
     A := RIGHT( ('00' || Day::TEXT) , 2);
 
-    SELECT TO_DATE( (Y::TEXT || M || A) , 'YYYYMMDD' ) INTO D;
+    SELECT TO_DATE( (Y || '-' || M || '-' || A) , 'YYYY-MM-DD' ) INTO D;
 
     RETURN D;
 END;
 $BODY$;
 
-ALTER FUNCTION public.fn_Date_From_Parts(Year INT, Month INT, Day INT)
+ALTER FUNCTION public.fn_date_from_parts(integer, integer, integer)
     OWNER TO postgres;
