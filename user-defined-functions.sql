@@ -20,3 +20,24 @@ END;
 $BODY$;
 
 ALTER FUNCTION public.fn_isleapyear(Year INT) OWNER TO postgres;
+
+
+CREATE OR REPLACE FUNCTION public.fn_daysInMonth(
+	year smallint, month smallint)
+    RETURNS smallint
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+DECLARE 
+    Days SMALLINT;
+BEGIN
+
+    
+
+    RETURN Days;
+END;
+$BODY$;
+
+ALTER FUNCTION public.fn_daysInMonth(smallint,smallint)
+    OWNER TO postgres;
