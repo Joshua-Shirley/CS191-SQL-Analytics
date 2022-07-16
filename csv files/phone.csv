@@ -1,0 +1,366 @@
+City,State,Area Code
+Calgary,AB,403
+Calgary,AB,587
+Calgary,AB,825
+Edmonton,AB,780
+Alaska,AK,907
+Birmingham,AL,205
+Huntsville,AL,256
+Huntsville,AL,938
+Mobile,AL,251
+Montgomery,AL,334
+Fort Smith,AR,479
+Jonesboro,AR,870
+Little Rock,AR,501
+American Samoa,AS,684
+Mesa,AZ,480
+Phoenix,AZ,602
+Phoenix,AZ,623
+Tucson,AZ,520
+Yuma,AZ,928
+Kelowna,BC,250
+Vancouver,BC,236
+Vancouver,BC,604
+Vancouver,BC,778
+Anaheim,CA,657
+Anaheim,CA,714
+Bakersfield,CA,661
+Concord,CA,925
+Fresno,CA,559
+Irvine,CA,949
+Long Beach,CA,562
+Los Angeles,CA,213
+Los Angeles,CA,310
+Los Angeles,CA,323
+Los Angeles,CA,424
+Los Angeles,CA,747
+Los Angeles,CA,818
+Oakland,CA,510
+Oceanside,CA,442
+Oceanside,CA,760
+Oxnard,CA,805
+Oxnard,CA,820
+Pasadena,CA,626
+Redding,CA,530
+Riverside,CA,951
+Sacramento,CA,279
+Sacramento,CA,916
+Salinas,CA,831
+San Bernardino,CA,909
+San Diego,CA,619
+San Diego,CA,858
+San Francisco,CA,415
+San Francisco,CA,628
+San Jose,CA,408
+San Jose,CA,669
+San Mateo,CA,650
+Santa Rosa,CA,707
+Stockton,CA,209
+Colorado Springs,CO,719
+Denver,CO,303
+Denver,CO,720
+Fort Collins,CO,970
+Bridgeport,CT,203
+Bridgeport,CT,475
+Hartford,CT,860
+Hartford,CT,959
+District of Columbia,DC,202
+Delaware,DE,302
+Cape Coral,FL,239
+Fort Lauderdale,FL,754
+Fort Lauderdale,FL,954
+Gainesville,FL,352
+Jacksonville,FL,904
+Lakeland,FL,863
+Miami,FL,305
+Miami,FL,786
+North Port,FL,941
+Orlando,FL,321
+Orlando,FL,407
+Palm Coast,FL,386
+Port St. Lucie,FL,772
+St. Petersburg,FL,727
+Tallahassee,FL,850
+Tampa,FL,813
+West Palm Beach,FL,561
+Albany,GA,229
+Atlanta,GA,404
+Atlanta,GA,470
+Atlanta,GA,678
+Augusta,GA,706
+Augusta,GA,762
+Macon,GA,478
+Roswell,GA,770
+Savannah,GA,912
+Guam,GU,671
+Hawaii,HI,808
+Cedar Rapids,IA,319
+Davenport,IA,563
+Des Moines,IA,515
+Mason City,IA,641
+Sioux City,IA,712
+Idaho,ID,208
+Idaho,ID,986
+Aurora,IL,331
+Aurora,IL,630
+Belleville,IL,618
+Chicago,IL,312
+Chicago,IL,773
+Chicago,IL,872
+Cicero,IL,708
+Elgin,IL,224
+Elgin,IL,847
+Peoria,IL,309
+Rockford,IL,779
+Rockford,IL,815
+Springfield,IL,217
+Evansville,IN,812
+Evansville,IN,930
+Fort Wayne,IN,260
+Hammond,IN,219
+Indianapolis,IN,317
+Indianapolis,IN,463
+Muncie,IN,765
+South Bend,IN,574
+Hutchinson,KS,620
+Overland Park,KS,913
+Topeka,KS,785
+Wichita,KS,316
+Ashland,KY,606
+Bowling Green,KY,270
+Bowling Green,KY,364
+Louisville,KY,502
+Baton Rouge,LA,225
+Houma,LA,985
+Lafayette,LA,337
+New Orleans,LA,504
+Shreveport,LA,318
+Boston,MA,339
+Boston,MA,617
+Boston,MA,781
+Boston,MA,857
+Lowell,MA,351
+Lowell,MA,978
+Manitoba,MA,204
+Springfield,MA,413
+Worcester,MA,508
+Worcester,MA,774
+Manitoba,MB,431
+Baltimore,MD,410
+Baltimore,MD,443
+Baltimore,MD,667
+Germantown,MD,240
+Germantown,MD,301
+Portland,ME,207
+Ann Arbor,MI,734
+Detroit,MI,313
+Flint,MI,810
+Grand Rapids,MI,616
+Kalamazoo,MI,269
+Lansing,MI,517
+Marquette,MI,906
+Muskegon,MI,231
+Saginaw,MI,989
+Troy,MI,248
+Troy,MI,947
+Warren,MI,586
+Bloomington,MN,952
+Brooklyn Park,MN,763
+Duluth,MN,218
+Minneapolis,MN,612
+Rochester,MN,507
+St. Cloud,MN,320
+St. Paul,MN,651
+Columbia,MO,573
+Kansas City,MO,816
+O'Fallon,MO,636
+Sedalia,MO,660
+Springfield,MO,417
+St. Louis,MO,314
+Northern Mariana Islands,MP,670
+Gulfport,MS,228
+Jackson,MS,601
+Jackson,MS,769
+Southaven,MS,662
+Montana,MT,406
+New Brunswick,NB,506
+Asheville,NC,828
+Charlotte,NC,704
+Charlotte,NC,980
+Fayetteville,NC,910
+Greensboro,NC,336
+Greensboro,NC,743
+Greenville,NC,252
+Lexington,NC,859
+Northern Canada,NC,867
+Raleigh,NC,919
+Raleigh,NC,984
+North Dakota,ND,701
+Grand Island,NE,308
+Omaha,NE,402
+Omaha,NE,531
+New Hampshire,NH,603
+Camden,NJ,856
+Elizabeth,NJ,908
+Jersey City,NJ,201
+Jersey City,NJ,551
+Newark,NJ,862
+Newark,NJ,973
+Toms River,NJ,732
+Toms River,NJ,848
+Trenton,NJ,609
+Trenton,NJ,640
+Newfoundland/Labrador,NL,709
+Albuquerque,NM,505
+Las Cruces,NM,575
+Nova Scotia/PE Island,NS,782
+Las Vegas,NV,702
+Las Vegas,NV,725
+Nova Scotia/PE Island,NV,902
+Reno,NV,775
+Albany,NY,518
+Albany,NY,838
+Binghamton,NY,607
+Brentwood,NY,631
+Brentwood,NY,934
+Buffalo,NY,716
+Hempstead,NY,516
+New City,NY,845
+New York,NY,212
+New York,NY,332
+New York,NY,347
+New York,NY,646
+New York,NY,718
+New York,NY,917
+New York,NY,929
+Rochester,NY,585
+Syracuse,NY,315
+Syracuse,NY,680
+Yonkers,NY,914
+Akron,OH,234
+Akron,OH,330
+Cincinnati,OH,513
+Cleveland,OH,216
+Columbus,OH,380
+Columbus,OH,614
+Dayton,OH,937
+Newark,OH,220
+Newark,OH,740
+Parma,OH,440
+Toledo,OH,419
+Toledo,OH,567
+Lawton,OK,580
+Oklahoma City,OK,405
+Tulsa,OK,539
+Tulsa,OK,918
+Hamilton,ON,289
+Hamilton,ON,365
+Hamilton,ON,905
+Kenora,ON,807
+London,ON,226
+London,ON,519
+London,ON,548
+Ottawa,ON,343
+Ottawa,ON,613
+Sudbury,ON,249
+Sudbury,ON,705
+Toronto,ON,416
+Toronto,ON,437
+Toronto,ON,647
+Eugene,OR,458
+Eugene,OR,541
+Portland,OR,503
+Portland,OR,971
+Allentown,PA,484
+Allentown,PA,610
+Erie,PA,814
+Lancaster,PA,223
+Lancaster,PA,717
+New Castle,PA,724
+Philadelphia,PA,215
+Philadelphia,PA,267
+Philadelphia,PA,445
+Pittsburgh,PA,412
+Pittsburgh,PA,878
+Scranton,PA,272
+Scranton,PA,570
+Puerto Rico,PR,787
+Puerto Rico,PR,939
+Granby,QC,450
+Granby,QC,579
+Montreal,QC,438
+Montreal,QC,514
+Quebec,QC,367
+Quebec,QC,418
+Quebec,QC,581
+Sherbrooke,QC,819
+Sherbrooke,QC,873
+Providence,RI,401
+Charleston,SC,843
+Charleston,SC,854
+Columbia,SC,803
+Greenville,SC,864
+South Dakota,SD,605
+Saskatchewan,SK,306
+Saskatchewan,SK,639
+Chattanooga,TN,423
+Clarksville,TN,931
+Jackson,TN,731
+Knoxville,TN,865
+Memphis,TN,901
+Nashville,TN,615
+Nashville,TN,629
+Abilene,TX,325
+Austin,TX,512
+Austin,TX,737
+Beaumont,TX,409
+College Station,TX,979
+Conroe,TX,936
+Corpus Christi,TX,361
+Dallas,TX,214
+Dallas,TX,469
+Dallas,TX,972
+Denton,TX,940
+El Paso,TX,915
+Fort Worth,TX,682
+Fort Worth,TX,817
+Houston,TX,281
+Houston,TX,346
+Houston,TX,713
+Houston,TX,832
+Killeen,TX,254
+Laredo,TX,956
+Lubbock,TX,806
+Midland,TX,432
+New Braunfels,TX,830
+San Antonio,TX,210
+San Antonio,TX,726
+Tyler,TX,430
+Tyler,TX,903
+Salt Lake City,UT,385
+Salt Lake City,UT,801
+St. George,UT,435
+Arlington,VA,571
+Arlington,VA,703
+Bristol,VA,276
+Lynchburg,VA,434
+Richmond,VA,804
+Roanoke,VA,540
+Virginia Beach,VA,757
+Virgin Islands,VI,340
+Vermont,VT,802
+Bellevue,WA,425
+Seattle,WA,206
+Spokane,WA,509
+Tacoma,WA,253
+Vancouver,WA,360
+Vancouver,WA,564
+Eau Claire,WI,534
+Eau Claire,WI,715
+Green Bay,WI,920
+Kenosha,WI,262
+Madison,WI,608
+Milwaukee,WI,414
+West Virginia,WV,304
+West Virginia,WV,681
+Wyoming,WY,307
