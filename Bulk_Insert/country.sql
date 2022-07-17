@@ -16,3 +16,17 @@ WHERE country NOT IN (
 
 -- Match country records to the c_in table records
 
+WITH CTE AS (
+    SELECT id
+    ,   c_in.country    
+    ,   country.country_id
+    FROM c_in
+    FULL JOIN country
+    ON c_in.country = country.country
+    WHERE c_in.id IS NOT NULL
+    AND country.country_id IS NOT NULL
+)
+UPDATE c_in
+SET country_id = CTE.country_id
+FROM CTE
+WHERE c_in.id = CTE.id;
