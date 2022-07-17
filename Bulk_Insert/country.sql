@@ -30,3 +30,8 @@ UPDATE c_in
 SET country_id = CTE.country_id
 FROM CTE
 WHERE c_in.id = CTE.id;
+
+-- Confirm all records where updated.
+SELECT *
+FROM c_in
+WHERE country_id IS NULL;
