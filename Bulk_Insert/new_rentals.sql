@@ -20,7 +20,8 @@ WITH RECURSIVE CTE(id) AS (
 )
 , CTE_date_random AS (
     SELECT id
-    ,  floor( random() * (dateMax - dateMin + 1) + dateMin  )::INTEGER AS rental_date_id
+    ,   floor( random() * (dateMax - dateMin + 1) + dateMin  )::INTEGER AS rental_date_id
+    --,   floor( random() * ( )  )
     FROM CTE, CTE_date_min_max
 )
 , CTE_Level_One AS (
@@ -95,15 +96,21 @@ WITH RECURSIVE CTE(id) AS (
     ,   row_number() OVER (PARTITION BY store_id) as store_row
     ,   staff_id
     FROM staff
-)            
-SELECT id
-,   rental_date
-,   inventory_id
-,   customer_id
-,   0 as return_date
-,   staff_id
-FROM CTE_Level_Three
-LEFT JOIN CTE_staff
-ON CTE_Level_Three.store_id = CTE_staff.store_id
-AND CTE_staff.store_row = 1
-ORDER BY rental_date ASC;
+)     
+, CTE_Final AS (
+    SELECT 
+        rental_date
+    ,   inventory_id
+    ,   customer_id
+    ,   (rental_date + ( floor( random() * ( 12 - 0 + 1 ) + 0 )::integer * interval '1 day' ))::date as return_date
+    ,   staff_id
+    FROM CTE_Level_Three
+    LEFT JOIN CTE_staff
+    ON CTE_Level_Three.store_id = CTE_staff.store_id
+    AND CTE_staff.store_row = 1
+    ORDER BY rental_date ASC
+)
+COPY CTE_Final 
+TO '\WGU\CS 191\rentals-2005-july.csv' 
+DELIMITER ',' 
+CSV HEADER;
