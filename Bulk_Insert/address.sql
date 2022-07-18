@@ -28,21 +28,22 @@ AND address.city_id = CTE.city_id
 AND address.address = CTE.address_1
 WHERE address_id IS NULL;
 
-/*
-SELECT address_1
-,   address_2
-,   c_in.city_id
-,   state
-,   c_in.postal_code
-,   c_in.phone
-,   c_in.address_id
-,   address.address_id
-FROM c_in
-FULL JOIN address
-ON c_in.city_id = address.city_id
-AND c_in.state = address.district
-AND c_in.postal_code = address.postal_code
-AND c_in.address_1 = address.address
-*/
+
+
+WITH CTE AS (
+    SELECT id
+    ,   address.address_id
+    FROM c_in
+    LEFT JOIN address
+    ON c_in.phone = address.phone
+    AND c_in.postal_code = address.postal_code
+    AND c_in.state = address.district
+    AND c_in.city_id = address.city_id
+    AND c_in.address_1 = address.address
+)
+UPDATE c_in
+SET address_id = CTE.address_id
+FROM CTE
+WHERE c_in.id = CTE.id;
 
 
