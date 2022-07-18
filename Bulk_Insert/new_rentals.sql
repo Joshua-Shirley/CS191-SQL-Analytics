@@ -11,7 +11,7 @@ WITH RECURSIVE CTE(id) AS (
     SELECT *
     FROM datefact
     WHERE year = 2005
-    AND month = 7
+    AND month = 9
 )
 , CTE_date_min_max AS (
     SELECT min(dateid) as dateMin
@@ -110,7 +110,12 @@ WITH RECURSIVE CTE(id) AS (
     AND CTE_staff.store_row = 1
     ORDER BY rental_date ASC
 )
-COPY CTE_Final 
-TO '\WGU\CS 191\rentals-2005-july.csv' 
-DELIMITER ',' 
-CSV HEADER;
+INSERT INTO rental
+( rental_date, inventory_id, customer_id, return_date , staff_id )
+SELECT *
+FROM CTE_FINAL
+
+
+
+
+   
