@@ -10,15 +10,7 @@ DECLARE
     low DATE;
     high DATE;
 BEGIN
-
-    /*
-    SELECT STRING_AGG('SELECT MIN(' || column_name || '), MAX(' || column_name || ') FROM ' || table_name || ' ' , ' UNION ALL ' )
-    FROM information_schema.columns
-    WHERE table_catalog = 'dvdrental2'
-    AND table_schema = 'public'
-    AND data_type IN ('date','timestamp with time zone','timestamp without time zone','time without timezone','time with timezone','interval');
-    */
-
+   
     SELECT INTO low, high
            MIN(min)::DATE
          , MAX(max)::DATE
