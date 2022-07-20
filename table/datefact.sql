@@ -8,3 +8,5 @@ CREATE TABLE datefact (
 
 ALTER TABLE IF EXISTS public.datefact
     OWNER to postgres;
+
+CREATE INDEX dates ON datefact(fulldate asc);
