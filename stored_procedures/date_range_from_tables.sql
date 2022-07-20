@@ -49,11 +49,7 @@ BEGIN
             UNION ALL 
         SELECT MIN(payment_date), MAX(payment_date) FROM payment  
             UNION ALL 
-        SELECT MIN(last_update), MAX(last_update) FROM film  
-            UNION ALL 
-        SELECT MIN(fulldate), MAX(fulldate) FROM datefact  
-            UNION ALL 
-        SELECT MIN(fulldate), MAX(fulldate) FROM dateview
+        SELECT MIN(last_update), MAX(last_update) FROM film         
     ) D;
     
     CALL public.update_date_table(low,high);
