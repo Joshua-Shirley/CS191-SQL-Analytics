@@ -14,3 +14,6 @@ CREATE TABLE report_rental_detail (
 
 ALTER TABLE IF EXISTS public.report_rental_detail
     OWNER to postgres;
+
+
+CREATE INDEX rental_id ON report_rental_detail(rental_id asc);
