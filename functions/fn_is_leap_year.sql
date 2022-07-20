@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION public.fn_isleapyear(
+CREATE OR REPLACE FUNCTION public.fn_is_leap_year(
 	year integer)
     RETURNS boolean
     LANGUAGE 'plpgsql'
@@ -19,5 +19,5 @@ BEGIN
 END;
 $BODY$;
 
-ALTER FUNCTION public.fn_isleapyear(integer)
+ALTER FUNCTION public.fn_is_leap_yea(integer)
     OWNER TO postgres;
