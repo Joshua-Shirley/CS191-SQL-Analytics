@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE public.updatetimetable(
+CREATE OR REPLACE PROCEDURE public.update_time_table(
 	)
 LANGUAGE 'plpgsql'
 AS $BODY$
