@@ -15,7 +15,7 @@ BEGIN
     ELSEIF ( month IN (4,6,9,11) ) THEN
         Days := 30;
     ELSE
-        IF fn_isleapyear(year) = TRUE THEN
+        IF fn_is_leap_year(year) = TRUE THEN
             Days := 29;
         ELSE
             Days := 28;
