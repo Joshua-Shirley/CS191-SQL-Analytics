@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS report_rental_detail;
-
 CREATE TABLE report_rental_detail (
         rental_id INTEGER PRIMARY KEY
     ,   inventory_id INTEGER
@@ -11,4 +9,7 @@ CREATE TABLE report_rental_detail (
     ,   store_id INTEGER
     ,   category_id INTEGER
     
-)
+);
+
+ALTER TABLE IF EXISTS public.report_rental_detail
+    OWNER to postgres;
