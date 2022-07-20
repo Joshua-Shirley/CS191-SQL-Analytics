@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION public.fn_daysinmonth(
+CREATE OR REPLACE FUNCTION public.fn_days_in_month(
 	year integer,
 	month integer)
     RETURNS integer
@@ -26,5 +26,5 @@ BEGIN
 END;
 $BODY$;
 
-ALTER FUNCTION public.fn_daysinmonth(integer, integer)
+ALTER FUNCTION public.fn_days_in_month(integer, integer)
     OWNER TO postgres;
