@@ -13,10 +13,10 @@ DECLARE
     MinYear INT := 0;
 BEGIN       
         
-    SELECT count(*) INTO DateTrigger FROM dateview WHERE year = yearin and month = monthin;
+    SELECT count(*) INTO DateTrigger FROM date_view WHERE year = yearin and month = monthin;
         
     IF DateTrigger = 0 THEN    
-        SELECT min(year) INTO MinYear FROM dateview;
+        SELECT min(year) INTO MinYear FROM date_view;
         CALL public.update_date_table(fn_date_from_parts(MinYear, 1, 1), fn_date_from_parts(yearin, 12, 31));
         
     END IF;
