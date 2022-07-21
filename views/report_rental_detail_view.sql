@@ -1,3 +1,7 @@
+-- View: public.report_rental_detail_view
+
+-- DROP VIEW public.report_rental_detail_view;
+
 CREATE OR REPLACE VIEW public.report_rental_detail_view
  AS
  SELECT report_rental_detail.rental_id,
@@ -18,11 +22,16 @@ CREATE OR REPLACE VIEW public.report_rental_detail_view
     report_rental_detail.store_id,
     report_rental_detail.inventory_id,
     report_rental_detail.category_id,
-    category.name AS category
+    category.name AS category,
+    city.city
    FROM report_rental_detail
      LEFT JOIN date_view d1 ON report_rental_detail.rental_date_id = d1.dateid
      LEFT JOIN timefact t1 ON report_rental_detail.rental_time_id = t1.timeid
-     LEFT JOIN category ON report_rental_detail.category_id = category.category_id;
+     LEFT JOIN category ON report_rental_detail.category_id = category.category_id
+     LEFT JOIN store ON report_rental_detail.store_id = store.store_id
+     LEFT JOIN address ON store.address_id = address.address_id
+     LEFT JOIN city ON address.city_id = city.city_id;
 
 ALTER TABLE public.report_rental_detail_view
     OWNER TO postgres;
+
