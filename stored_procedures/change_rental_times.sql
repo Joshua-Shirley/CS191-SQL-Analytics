@@ -1,4 +1,5 @@
-CREATE OR REPLACE PROCEDURE public.change_rental_times()
+CREATE OR REPLACE PROCEDURE public.change_rental_times(
+	)
 LANGUAGE 'plpgsql'
 AS $BODY$
 DECLARE              
@@ -38,15 +39,17 @@ BEGIN
     , CTE_Update AS (
     SELECT rental_id
     ,   rental_date::date + minute + Hour * interval '1 hour' as n
+    --,   rental_date::date + 17 * interval '1 hour ' as n
     FROM CTE_Time
     )
     UPDATE rental
     SET rental_date = n
     FROM CTE_Update
     WHERE rental.rental_id = CTE_Update.rental_id;
+    
+    call report_rental_complete_update();
 
 END;
 $BODY$;
-
 ALTER PROCEDURE public.change_rental_times()
     OWNER TO postgres;
