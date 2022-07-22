@@ -2,7 +2,14 @@
 
 ## Performance Assessment: Advanced Data Management
 
-### A. Month Sales / Average Rental Time / Rental Sales By Category / Rental Time By Category Pivot Table
+### A. Business Report To Generate - Percentage of Sales Pivot Table
+
+As I looked through the database data I noticed that the dvd rental operates two stores with two employees.
+They will be looking to hire more staff quickly.  The managers need to know when to schedule employees based on customer needs.
+The managers will schedule the workers on a weekly basis.
+This report helps them determine staffing needs.
+
+Here is an example of that report:
 
 | Store      	| Day       	| 10:00 AM 	| 11:00 AM 	| 12:00 PM 	| 1:00 PM 	| 2:00 PM 	| 3:00 PM 	| 4:00 PM 	| 5:00 PM 	| 6:00 PM 	| 7:00 PM 	| 8:00 PM 	| 9:00 PM 	| 10:00 PM 	| 11:00 PM 	| 12:00 AM 	| Closed 	|
 |------------	|-----------	|----------	|----------	|----------	|---------	|---------	|---------	|---------	|---------	|---------	|---------	|---------	|---------	|----------	|----------	|----------	|--------	|
@@ -25,10 +32,81 @@
 
 #### A1. Describe the data used for the report.
 
- 
+The report will require data from multiple tables.  
+Tables:  Rental, Inventory, Film, Category, Store, Address
 
 #### A2. New Tables - details & summary
+
+I have added 3 new tables to the database.
+New Tables: datefact, timefact, report_rental_detail
+New Views: report_rental_detail_view, report_pivot_days_hours_percentage
+
 #### A3. Specific fields in the detailed and summary sections
+
+The detailed section is comprised of two objects: table - report_rental_detail, view - report_rental_detail_view.
+The summary section is the view report_pivot_days_hours_percentage.
+
+| Report_Rental_Detail 	|           	|
+|----------------------	|-----------	|
+| Name                 	| Data Type 	|
+| rental_id            	| INTEGER   	|
+| rental_date_id       	| INTEGER   	|
+| rental_time_id       	| INTEGER   	|
+| return_date_id       	| INTEGER   	|
+| return_time_id       	| INTEGER   	|
+| customer_id          	| INTEGER   	|
+| staff_id             	| INTEGER   	|
+| store_id             	| INTEGER   	|
+| inventory_id         	| INTEGER   	|
+| category_id          	| INTEGER   	|
+| film_id              	| INTEGER   	|
+
+| Report_Rental_Detail_View 	|           	|
+|---------------------------	|-----------	|
+| Name                      	| Data Type 	|
+| rental_id                 	| INTEGER   	|
+| rental_date_timestamp     	| TIMESTAMP 	|
+| rental_date               	| DATE      	|
+| rent_year                 	| SMALLINT  	|
+| rent_month                	| SMALLINT  	|
+| rent_day                  	| SMALLINT  	|
+| rent_month_name           	| SMALLINT  	|
+| rent_dow                  	| SMALLINT  	|
+| rent_week_day             	| TEXT      	|
+| rent_time                 	| TIMESTAMP 	|
+| hour                      	| SMALLINT  	|
+| minute                    	| SMALLINT  	|
+| return_date_id            	| INTEGER   	|
+| customer_id               	| INTEGER   	|
+| staff_id                  	| INTEGER   	|
+| store_id                  	| INTEGER   	|
+| inventory_id              	| INTEGER   	|
+| category_id               	| INTEGER   	|
+| category                  	| TEXT      	|
+| city                      	| TEXT      	|
+
+| Report_Pivot_Days_Hours_Percentage 	|              	|
+|------------------------------------	|--------------	|
+| Name                               	| Data Type    	|
+| store_city                         	| TEXT         	|
+| day                                	| TEXT         	|
+| 10 AM                              	| numeric(5,2) 	|
+| 11 AM                              	| numeric(5,2) 	|
+| 12 PM                              	| numeric(5,2) 	|
+| 1 PM                               	| numeric(5,2) 	|
+| 2 PM                               	| numeric(5,2) 	|
+| 3 PM                               	| numeric(5,2) 	|
+| 4 PM                               	| numeric(5,2) 	|
+| 5 PM                               	| numeric(5,2) 	|
+| 6 PM                               	| numeric(5,2) 	|
+| 7 PM                               	| numeric(5,2) 	|
+| 8 PM                               	| numeric(5,2) 	|
+| 9 PM                               	| numeric(5,2) 	|
+| 10 PM                              	| numeric(5,2) 	|
+| 11 PM                              	| numeric(5,2) 	|
+| 12 AM                              	| numeric(5,2) 	|
+| Closed Hours                       	| numeric(5,2) 	|
+
 #### A4. Data Transformations - custom functions
 
   Rental dates and Payment dates are off by an average of 607 days.
