@@ -128,21 +128,10 @@ For the pivot table hourly data we use a function to divide integers and output 
     END;
     $BODY$;
 
-Generally 
-
   Rental dates and Payment dates are off by an average of 607 days.
   Either the data was input incorrectly or the video store didn't collect money for a long time, which probably resulted in the shuttering.
 
-  ** Stored Proceedures **
   
-  1. insertTime
-  2. insertDate
-  
-  ** User Defined Functions **
-  
-  1. fn_isleapyear(int)
-  2. fn_daysinmonth(year smallint, month smallint)
-
 #### A5. Data Triggers - with continual update.
 #### A6. Refresh frequency - What is relevant to stakeholders.
 
