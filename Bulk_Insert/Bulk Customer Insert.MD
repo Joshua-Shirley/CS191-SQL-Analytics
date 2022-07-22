@@ -7,7 +7,8 @@
 5. [Extract address data](#step5)
 6. [Extract customer data](#step6)
 7. [Random New Orders Stored Proceedure](#step7)
-8. [Drop Table](#step8)
+8. [Save data to csv file](#step8)
+9. [Drop Table](#step9)
 
 ### Step 1 - Table to hold temporary data <a name="step1"></a>
 
@@ -208,6 +209,16 @@ The original database only includes sample data for 4 months in 2005.
 For some of my pivot tables more data is needed to verify the pivot tables are returning the query correctly.
 
 This is stored in the folder <a href="https://github.com/Joshua-Shirley/CS191-SQL-Analytics/blob/main/stored_procedures/random_orders_monthly.sql">here.</a>
+
+### Step 8 - Copy data back to CSV file<a name="step7"></a>
+
+This step is optional.  But show the code to copy c_in data back into a CSV file.
+
+        -- SAVE New Customers INTO CSV file.
+        COPY c_in(first_name, last_name, email, address_1, address_2, city, state, postal_code, country, phone) 
+        TO '\customer_list_comma.csv' 
+        DELIMITER ',' 
+        CSV HEADER;
 
 ### Step 8 - DROP c_in Table<a name="step8"></a>
 
