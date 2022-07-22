@@ -13,5 +13,5 @@ $BODY$;
 CREATE TRIGGER rental_report_delete
     AFTER DELETE
     ON rental
-    FOR EACH STATEMENT
+    FOR EACH ROW
     EXECUTE PROCEDURE rental_report_delete();
