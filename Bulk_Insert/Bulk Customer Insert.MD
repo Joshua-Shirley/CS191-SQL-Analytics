@@ -203,6 +203,12 @@
 
 ### Step 7 - Random Order Month Stored Procedure<a name="step7"></a>
 
+The purpose of the random_orders_monthly() procedure is to create new orders to insert more data for testing.
+The original database only includes sample data for 4 months in 2005.
+For some of my pivot tables more data is needed to verify the pivot tables are returning the query correctly.
+
+This is stored in the folder <a href="https://github.com/Joshua-Shirley/CS191-SQL-Analytics/blob/main/stored_procedures/random_orders_monthly.sql">here.</a>
+
 ### Step 8 - DROP c_in Table<a name="step8"></a>
 
     DROP TABLE c_in;
