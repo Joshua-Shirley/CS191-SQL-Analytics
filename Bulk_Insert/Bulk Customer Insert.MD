@@ -32,7 +32,7 @@
 ### Step 2 - Bulk import CSV File<a name="step2"></a>
 
     COPY c_in( first_name, last_name, email, address_1, address_2 , city , state , postal_code , country , phone )
-    FROM '\customer_list_v1.csv'
+    FROM '\random_customer.csv'
     DELIMITER ','
     CSV HEADER;
     
