@@ -109,6 +109,27 @@ The summary section is the view report_pivot_days_hours_percentage.
 
 #### A4. Data Transformations - custom functions
 
+For the pivot table hourly data we use a function to divide integers and output a numeric(5,2) data type.  
+
+    CREATE OR REPLACE FUNCTION public.fn_percent_display(
+      dividend bigint,
+      divisor bigint)
+        RETURNS numeric
+        LANGUAGE 'plpgsql'
+        COST 100
+        VOLATILE PARALLEL UNSAFE
+    AS $BODY$
+    DECLARE 
+        perc numeric(5,2);
+    BEGIN  
+        --(A::NUMERIC / total)*100::NUMERIC(5,2)
+        SELECT (( Dividend::NUMERIC / DIVISOR ) * 100)::NUMERIC(5,2) INTO perc;    
+        RETURN perc;
+    END;
+    $BODY$;
+
+Generally 
+
   Rental dates and Payment dates are off by an average of 607 days.
   Either the data was input incorrectly or the video store didn't collect money for a long time, which probably resulted in the shuttering.
 
