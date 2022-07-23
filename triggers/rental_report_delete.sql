@@ -6,7 +6,8 @@ BEGIN
 
     DELETE FROM report_rental_detail
     WHERE rental_id = OLD.rental_id;
-
+    
+    RETURN old;
 END;
 $BODY$;
 
