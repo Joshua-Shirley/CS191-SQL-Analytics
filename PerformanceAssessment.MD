@@ -110,6 +110,7 @@ The summary section is the view report_pivot_days_hours_percentage.
 #### A4. Data Transformations - custom functions
 
 For the pivot table hourly data we use a function to divide integers and output a numeric(5,2) data type.  
+The data is transformed to help the viewer to easily read the percentages.
 
     CREATE OR REPLACE FUNCTION public.fn_percent_display(
       dividend bigint,
@@ -127,15 +128,128 @@ For the pivot table hourly data we use a function to divide integers and output 
         RETURN perc;
     END;
     $BODY$;
+    
+I find that whenever possible using table data to create the customizations typically provides faster query executions.
+SQL very efficiently combines and filters table data.  My experience with larger data sets functions should be minimized with large queries.  User defined functions become useful once the query has summarized data into small sets.
+    
+#### A5. Business uses of the detailed and summary sections.
 
-  Rental dates and Payment dates are off by an average of 607 days.
-  Either the data was input incorrectly or the video store didn't collect money for a long time, which probably resulted in the shuttering.
+The main business use for the summary report is to view transactions per hour each day.
+The report can be used to determine when each store needs more or less staff.
 
-  
-#### A5. Data Triggers - with continual update.
+The (Report_Rental_Detail_View) detailed report provides broader information and can be used to create many variations of the summary report.
+I have found through experience that managers almost always ask for a few variations of the summary report.  I like to add relevant complimentary data into the detailed table report so I can quickly make changes to the summary report or reports.
+
+While working on this project I wrote 4 different summary reports from the detail table.
+
 #### A6. Refresh frequency - What is relevant to stakeholders.
 
+The Report_Pivot_Days_Hours_Percentage report is available on demand.  The summary report should be available to the stakeholders on a weekly basis.  The managers can schedule employees on a weekly basis.   
+
+The data is refreshed through data triggers on the rental table.  The detailed report is updated after each statement insert/update/delete action on the rental table.  I choose "for each statement" triggers to allow for fast transactions in the case of mase data imports.  I tested the insert trigger with stored procedure that allows rental inserts thousands per transaction.  
+
 ### B. SQL Code Tables to hold reports
+
+Report_Rental_Detail Table
+        CREATE TABLE report_rental_detail (
+                rental_id INTEGER PRIMARY KEY
+            ,   rental_date_id INTEGER
+            ,   rental_time_id INTEGER
+            ,   return_date_id INTEGER
+            ,   return_time_id INTEGER
+            ,   customer_id INTEGER        
+            ,   staff_id INTEGER
+            ,   store_id INTEGER        
+            ,   inventory_id INTEGER
+            ,   category_id INTEGER         
+            ,   film_id INTEGER 
+        );
+
+        ALTER TABLE IF EXISTS public.report_rental_detail
+            OWNER to postgres;
+
+        CREATE INDEX rental_id ON report_rental_detail(rental_id asc);
+
+DateFact Table
+
+        CREATE TABLE datefact ( 
+            dateid SERIAL PRIMARY KEY,
+            fullDate date NOT NULL,
+            year smallint NOT NULL,
+            month smallint NOT NULL,
+            day smallint NOT NULL 
+        );
+
+        ALTER TABLE IF EXISTS public.datefact
+            OWNER to postgres;
+
+        CREATE INDEX dates ON datefact(fulldate asc);
+ 
+Date_View View
+
+        CREATE OR REPLACE VIEW public.date_view
+         AS
+            SELECT datefact.dateid
+                ,   datefact.fulldate
+                ,   datefact.year
+                ,   datefact.month
+                ,   datefact.day   
+                ,   EXTRACT( Quarter FROM fulldate ) as Quarter
+                ,   to_char(datefact.fulldate::timestamp with time zone, 'Month'::text) AS MonthName
+                ,   EXTRACT( DOW FROM fulldate ) as DOW
+                ,   to_char(datefact.fulldate::timestamp with time zone, 'Day'::text) AS Weekday   
+            FROM datefact;
+
+        ALTER TABLE public.date_view
+            OWNER TO postgres;
+
+TimeFact Table
+
+        CREATE TABLE timefact(
+            TimeID SERIAL PRIMARY KEY,	
+            Hour SMALLINT NULL,
+            Minute SMALLINT NULL,
+            Second SMALLINT NULL
+        );
+
+        ALTER TABLE IF EXISTS public.timeFact
+            OWNER to postgres;
+
+Report_Rental_Detail_View View
+
+        CREATE OR REPLACE VIEW public.report_rental_detail_view
+         AS
+         SELECT report_rental_detail.rental_id,
+            d1.fulldate + t1.hour::double precision * '01:00:00'::interval + t1.minute::double precision * '00:01:00'::interval AS rental_date_timestamp,
+            d1.fulldate AS rental_date,
+            d1.year AS rent_year,
+            d1.month AS rent_month,
+            d1.day AS rent_day,
+            d1.monthname AS rent_month_name,
+            d1.dow AS rent_dow,
+            d1.weekday AS rent_week_day,
+            t1.hour::double precision * '01:00:00'::interval + t1.minute::double precision * '00:01:00'::interval AS rent_time,
+            t1.hour,
+            t1.minute,
+            report_rental_detail.return_date_id,
+            report_rental_detail.customer_id,
+            report_rental_detail.staff_id,
+            report_rental_detail.store_id,
+            report_rental_detail.inventory_id,
+            report_rental_detail.category_id,
+            category.name AS category,
+            city.city
+           FROM report_rental_detail
+             LEFT JOIN date_view d1 ON report_rental_detail.rental_date_id = d1.dateid
+             LEFT JOIN timefact t1 ON report_rental_detail.rental_time_id = t1.timeid
+             LEFT JOIN category ON report_rental_detail.category_id = category.category_id
+             LEFT JOIN store ON report_rental_detail.store_id = store.store_id
+             LEFT JOIN address ON store.address_id = address.address_id
+             LEFT JOIN city ON address.city_id = city.city_id;
+
+        ALTER TABLE public.report_rental_detail_view
+            OWNER TO postgres;
+
 
 ### C. SQL Extract and Validation
 
