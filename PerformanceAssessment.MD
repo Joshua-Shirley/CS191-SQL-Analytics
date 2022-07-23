@@ -49,6 +49,9 @@ New Views: report_rental_detail_view, report_pivot_days_hours_percentage
 The detailed section is comprised of two objects: table - report_rental_detail, view - report_rental_detail_view.
 The summary section is the view report_pivot_days_hours_percentage.
 
+<table border="0">
+    <tr>
+        <td>
 | Report_Rental_Detail 	|           	|
 |----------------------	|-----------	|
 | Name                 	| Data Type 	|
@@ -63,7 +66,8 @@ The summary section is the view report_pivot_days_hours_percentage.
 | inventory_id         	| INTEGER   	|
 | category_id          	| INTEGER   	|
 | film_id              	| INTEGER   	|
-
+        </td>
+        <td>
 | Report_Rental_Detail_View 	|           	|
 |---------------------------	|-----------	|
 | Name                      	| Data Type 	|
@@ -87,6 +91,9 @@ The summary section is the view report_pivot_days_hours_percentage.
 | category_id               	| INTEGER   	|
 | category                  	| TEXT      	|
 | city                      	| TEXT      	|
+        
+        </td>
+        <td>
 
 | Report_Pivot_Days_Hours_Percentage 	|              	|
 |------------------------------------	|--------------	|
@@ -109,6 +116,15 @@ The summary section is the view report_pivot_days_hours_percentage.
 | 11 PM                              	| numeric(5,2) 	|
 | 12 AM                              	| numeric(5,2) 	|
 | Closed Hours                       	| numeric(5,2) 	|
+        
+        
+        </td>
+    </tr>
+</table>
+     
+
+
+
 
 #### A4. Data Transformations - custom functions
 
