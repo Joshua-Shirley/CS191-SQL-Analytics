@@ -154,7 +154,7 @@ The summary section is the view report_pivot_days_hours_percentage.
 </td>
 <td border="0"  bordercolor="white"  valign="top" style="vertical-align: top; border-color: white;">
     
-| DateView  	|          	|
+| Date_View  	|          	|
 |-----------	|----------	|
 | Name      	| Type     	|
 | dateid    	| integer  	|
@@ -418,6 +418,7 @@ Fn_percent_display is used in the summary tables to alter decimals into the more
 There are some more functions I wrote for the datefact table.  There is a stored procedure that updates the date range within the datefact table.  In order to only insert actual dates I needed to create a couple functions that confirm real dates.  Firstly, each month has a set number of days. Fn_days_in_month returns the number of days for a month in a given year.  The function needs to also check if a year is a leap year or not. 
 
 Days In Month Function
+
         CREATE OR REPLACE FUNCTION public.fn_days_in_month(
             year integer,
             month integer)
@@ -448,6 +449,7 @@ Days In Month Function
             OWNER TO postgres;
             
 Is Leap Year Function
+
         CREATE OR REPLACE FUNCTION public.fn_is_leap_year(
             year integer)
             RETURNS boolean
@@ -502,8 +504,79 @@ This function uses integers to create a date.
 
 ### E. SQL Triggers
 
+Rental Table - Insert Trigger Function and Trigger
 
+        CREATE OR REPLACE FUNCTION public.log_rental_to_reports_detail()
+            RETURNS trigger
+            LANGUAGE 'plpgsql'       
+        AS $BODY$
+        BEGIN  
 
+                INSERT INTO report_rental_detail        
+                SELECT rental_id
+                    , rental.inventory_id
+                    , film.film_id            
+                    , d1.dateid as rental_date_id
+                    , t1.timeid as rental_time_id            
+                    , d2.dateid as return_date_id
+                    , t2.timeid as return_time_id
+                    , film_category.category_id
+                    , store_id
+                FROM rental
+                LEFT JOIN inventory
+                ON rental.inventory_id = inventory.inventory_id
+                LEFT JOIN film
+                ON inventory.film_id = film.film_id
+                LEFT JOIN film_category
+                ON film.film_id = film_category.film_id
+                LEFT JOIN category
+                ON film_category.category_id = category.category_id
+                LEFT JOIN datefact d1
+                ON d1.fulldate = rental.rental_date::date
+                LEFT JOIN datefact d2
+                ON d2.fulldate = rental.return_date::date
+                LEFT JOIN timefact t1
+                ON t1.hour = EXTRACT( HOUR FROM rental.rental_date)
+                AND t1.minute = EXTRACT( MINUTE FROM rental.rental_date)
+                LEFT JOIN timefact t2
+                ON t2.hour = EXTRACT( HOUR FROM rental.return_date)
+                AND t2.minute = EXTRACT( MINUTE FROM rental.return_date)
+                WHERE rental_id NOT IN (
+                    SELECT rental_id FROM report_rental_detail   
+                )
+                order by rental_date;
+
+            return new;
+        END;
+        $BODY$;
+
+        CREATE TRIGGER report_update_details
+            AFTER INSERT
+            ON rental
+            FOR EACH STATEMENT
+            EXECUTE PROCEDURE log_rental_to_reports_detail();
+        ALTER FUNCTION public.log_rental_to_reports_detail()
+            OWNER TO postgres;
+
+Rental Table - Delete Function Trigger and Trigger
+
+        CREATE FUNCTION rental_report_delete()
+            RETURNS TRIGGER
+            LANGUAGE PLPGSQL
+        AS $BODY$
+        BEGIN
+
+            DELETE FROM report_rental_detail
+            WHERE rental_id = OLD.rental_id;
+
+        END;
+        $BODY$;
+
+        CREATE TRIGGER rental_report_delete
+            AFTER DELETE
+            ON rental
+            FOR EACH ROW
+            EXECUTE PROCEDURE rental_report_delete();
 
 ### F. Stored Procedure - Refresh detailed and summary tables.
 
