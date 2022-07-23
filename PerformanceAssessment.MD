@@ -44,14 +44,17 @@ I have added 3 new tables to the database.
 New Tables: datefact, timefact, report_rental_detail
 New Views: report_rental_detail_view, report_pivot_days_hours_percentage
 
+With this project I wanted to test an idea proposed in the last SQL class I took.  The idea is that dates should be stored in one table and times in another table.  Dates within the database use an integer to store a foreign key relationship with the date and time tables.  A date table allows for further normalization of tables and potentially reduced storage requirements.  Integers use 4 bytes and Timestamps use 8 bytes.  I like the opportunity to reduce storage requirements, but I see an opportunity to use the table data to aid in faster queries for reports.
+
+
 #### A3. Specific fields in the detailed and summary sections
 
 The detailed section is comprised of two objects: table - report_rental_detail, view - report_rental_detail_view.
 The summary section is the view report_pivot_days_hours_percentage.
 
-<table border="0" style="vertical-align:top; border: 1px solid white;">
-<tr style="border: 1px solid white;">
-<td style="vertical-align: top; border: 1px solid white;">
+<table border="0" bgcolor="white" style="border-color: white;">
+<tr>
+<td border="0" bordercolor="white" valign="top" style="vertical-align: top; border-color: white;">
     
     
 | Report_Rental_Detail 	|           	|
@@ -71,7 +74,7 @@ The summary section is the view report_pivot_days_hours_percentage.
 
     
 </td>
-<td style="vertical-align: top; border: 1px solid white;">
+<td border="0" bordercolor="white" valign="top" style="vertical-align: top; border-color: white;">
     
     
 | Report_Rental_Detail_View 	|           	|
@@ -100,7 +103,7 @@ The summary section is the view report_pivot_days_hours_percentage.
 
     
 </td>
-<td style="vertical-align: top; border: 1px solid white;">
+<td border="0"  bordercolor="white"  valign="top" style="vertical-align: top; border-color: white;">
     
 | Pivot_Days_Hours 	|              	|
 |------------------	|--------------	|
@@ -126,11 +129,51 @@ The summary section is the view report_pivot_days_hours_percentage.
   
 </td>
 </tr>
+<tr>
+<td border="0"  bordercolor="white"  valign="top" style="vertical-align: top; border-color: white;">
+    
+| DateFact 	|          	|
+|----------	|----------	|
+| Name     	| Type  	|
+| DateId   	| INTEGER  	|
+| fulldate 	| Date     	|
+| year     	| SMALLINT 	|
+| month    	| SMALLINT 	|
+| day      	| SMALLINT 	|
+    
+    
+    </td>
+<td border="0"  bordercolor="white"  valign="top" style="vertical-align: top; border-color: white;">
+    
+| DateView  	|          	|
+|-----------	|----------	|
+| Name      	| Type     	|
+| dateid    	| integer  	|
+| fulldate  	| date     	|
+| year      	| SMALLINT 	|
+| month     	| SMALLINT 	|
+| day       	| SMALLINT 	|
+| quarter   	| SMALLINT 	|
+| monthname 	| TEXT     	|
+| dow       	| SMALLINT 	|
+| weekday   	| TEXT     	|    
+    
+    </td>
+<td border="0"  bordercolor="white"  valign="top" style="vertical-align: top; border-color: white;">
+
+| TimeFact 	|          	|
+|----------	|----------	|
+| Name     	| Type 	    |
+| timeId   	| INTEGER  	|
+| hour     	| SMALLINT 	|
+| minute   	| SMALLINT 	|
+| second   	| SMALLINT 	|
+    
+    </td>
+</tr>
+    
 </table>
      
-
-
-
 
 #### A4. Data Transformations - custom functions
 
@@ -156,6 +199,14 @@ The data is transformed to help the viewer to easily read the percentages.
     
 I find that whenever possible using table data to create the customizations typically provides faster query executions.
 SQL very efficiently combines and filters table data.  My experience with larger data sets functions should be minimized with large queries.  User defined functions become useful once the query has summarized data into small sets.
+
+Many of the business reports that I have created in the past often times use dates that need to be transformed into month names, day names, and quarters.  With a date table and date view those transformations take place on smaller sets of data and are joined to the larger set.  
+
+* Rental Table example: *
+160,000 rental_dates 
+Date range 4 months ~ 120 days.
+The report output "2005-05-15" transforming month to "May" and the day of the week to "Sunday".
+Postgres EXTRACT functions are fast but using some joined tables is more efficient.
     
 #### A5. Business uses of the detailed and summary sections.
 
@@ -408,6 +459,36 @@ Is Leap Year Function
         $BODY$;
 
         ALTER FUNCTION public.fn_is_leap_yea(integer)
+            OWNER TO postgres;
+
+Fn Date From Parts
+This function uses integers to create a date. 
+
+        CREATE OR REPLACE FUNCTION public.fn_date_from_parts(
+            year integer,
+            month integer,
+            day integer)
+            RETURNS date
+            LANGUAGE 'plpgsql'            
+        AS $BODY$
+        DECLARE 
+            D DATE;
+            Y INT;
+            M INT;
+            A INT;
+        BEGIN
+
+            Y := Year::TEXT;
+            M := RIGHT( ('00' || Month::TEXT) , 2);
+            A := RIGHT( ('00' || Day::TEXT) , 2);
+
+            SELECT TO_DATE( (Y || '-' || M || '-' || A) , 'YYYY-MM-DD' ) INTO D;
+
+            RETURN D;
+        END;
+        $BODY$;
+
+        ALTER FUNCTION public.fn_date_from_parts(integer, integer, integer)
             OWNER TO postgres;
 
 ### E. SQL Triggers
