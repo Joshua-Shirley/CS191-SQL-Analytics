@@ -1,22 +1,23 @@
 CREATE OR REPLACE FUNCTION public.log_rental_to_reports_detail()
     RETURNS trigger
-    LANGUAGE 'plpgsql'
-    COST 100
-    VOLATILE NOT LEAKPROOF
+    LANGUAGE 'plpgsql'       
 AS $BODY$
 BEGIN  
     
-        INSERT INTO report_rental_detail
-        
-        SELECT rental_id
-            , rental.inventory_id
-            , film.film_id            
-            , d1.dateid as rental_date_id
-            , t1.timeid as rental_time_id            
-            , d2.dateid as return_date_id
-            , t2.timeid as return_time_id
-            , film_category.category_id
-            , store_id
+    INSERT INTO report_rental_detail
+    ( rental_id,  inventory_id, rental_date_id , rental_time_id, return_date_id, return_time_id , customer_id , staff_id, store_id , category_id, film_id )
+    SELECT      
+            rental_id
+        ,   rental.inventory_id               
+        ,   d1.dateid as rental_date_id
+        ,   t1.timeid as rental_time_id            
+        ,   d2.dateid as return_date_id
+        ,   t2.timeid as return_time_id
+        ,   customer_id
+        ,   staff_id
+        ,   store_id
+        ,   film_category.category_id
+        ,   film.film_id 
         FROM rental
         LEFT JOIN inventory
         ON rental.inventory_id = inventory.inventory_id
@@ -37,20 +38,21 @@ BEGIN
         ON t2.hour = EXTRACT( HOUR FROM rental.return_date)
         AND t2.minute = EXTRACT( MINUTE FROM rental.return_date)
         WHERE rental_id NOT IN (
-            SELECT rental_id FROM report_rental_detail   
+            SELECT rental_id 
+            FROM report_rental_detail                        
         )
-        order by rental_date;
+        order by rental_date;        
 
     return new;
 
 END;
 $BODY$;
 
-
 CREATE TRIGGER report_update_details
     AFTER INSERT
     ON rental
     FOR EACH STATEMENT
     EXECUTE PROCEDURE log_rental_to_reports_detail();
+    
 ALTER FUNCTION public.log_rental_to_reports_detail()
     OWNER TO postgres;
