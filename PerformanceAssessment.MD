@@ -1,15 +1,15 @@
 # D191 - Advanced Data Management
 
+https://github.com/Joshua-Shirley/CS191-SQL-Analytics
+
 ## Performance Assessment: Advanced Data Management
 
 ### A. Business Report To Generate - Percentage of Sales Pivot Table
 
-As I looked through the database data I noticed that the dvd rental operates two stores with two employees.
-They will be looking to hire more staff quickly.  The managers need to know when to schedule employees based on customer needs.
-The managers will schedule the workers on a weekly basis.
-This report helps them determine staffing needs.
+DVDRental is a new business, and they are understaffed. The managers would like to hire employees but are unsure how many employees they should hire and when to schedule them. I have created a report named report_pivot_days_hours_percentage as a view. The pivot table report helps solve the store managers’ when-to-schedule problem.
+The pivot report breaks down the percentage of daily business into hours. Each store manager can use the historical data for daily and hourly schedules.
+Many business reports are often visualized within date ranges.  
 
-Business managers love pivot reports.
 
 Here is an example of that report:
 
@@ -35,17 +35,27 @@ Here is an example of that report:
 
 #### A1. Describe the data used for the report.
 
-The report will require data from multiple tables.  
-Tables:  Rental, Inventory, Film, Category, Store, Address
+The report requires data from these tables.   
+* Rental
+* Inventory
+* Film
+* Category
+* Store
+* Address
 
 #### A2. New Tables - details & summary
 
 I have added 3 new tables to the database.
-New Tables: datefact, timefact, report_rental_detail
-New Views: report_rental_detail_view, report_pivot_days_hours_percentage
+New Tables: 
+* datefact
+* timefact
+* report_rental_detail
+New Views: 
+* report_rental_detail_view
+* report_pivot_days_hours_percentage
+* date_view
 
-With this project I wanted to test an idea proposed in the last SQL class I took.  The idea is that dates should be stored in one table and times in another table.  Dates within the database use an integer to store a foreign key relationship with the date and time tables.  A date table allows for further normalization of tables and potentially reduced storage requirements.  Integers use 4 bytes and Timestamps use 8 bytes.  I like the opportunity to reduce storage requirements, but I see an opportunity to use the table data to aid in faster queries for reports.
-
+I wanted to test date and time normalization with this class project. Specifically, I wanted to experiment with storing dates, times, and date extractions in a normalized table. 
 
 #### A3. Specific fields in the detailed and summary sections
 
@@ -201,7 +211,7 @@ SQL very efficiently combines and filters table data.  My experience with larger
 
 Many of the business reports that I have created in the past often times use dates that need to be transformed into month names, day names, and quarters.  With a date table and date view those transformations take place on smaller sets of data and are joined to the larger set.  
 
-* Rental Table example: *
+** Rental Table example: **
 160,000 rental_dates 
 Date range 4 months ~ 120 days.
 The report output "2005-05-15" transforming month to "May" and the day of the week to "Sunday".
