@@ -141,8 +141,7 @@ The summary section is the view report_pivot_days_hours_percentage.
 | month    	| SMALLINT 	|
 | day      	| SMALLINT 	|
     
-    
-    </td>
+</td>
 <td border="0"  bordercolor="white"  valign="top" style="vertical-align: top; border-color: white;">
     
 | DateView  	|          	|
@@ -158,7 +157,7 @@ The summary section is the view report_pivot_days_hours_percentage.
 | dow       	| SMALLINT 	|
 | weekday   	| TEXT     	|    
     
-    </td>
+</td>
 <td border="0"  bordercolor="white"  valign="top" style="vertical-align: top; border-color: white;">
 
 | TimeFact 	|          	|
@@ -169,7 +168,7 @@ The summary section is the view report_pivot_days_hours_percentage.
 | minute   	| SMALLINT 	|
 | second   	| SMALLINT 	|
     
-    </td>
+</td>
 </tr>
     
 </table>
