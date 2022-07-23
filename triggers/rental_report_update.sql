@@ -50,6 +50,8 @@ BEGIN
         )
         order by rental_date; 
 
+    return new;
+
 END;
 $BODY$;
 
