@@ -151,6 +151,7 @@ The data is refreshed through data triggers on the rental table.  The detailed r
 ### B. SQL Code Tables to hold reports
 
 Report_Rental_Detail Table
+
         CREATE TABLE report_rental_detail (
                 rental_id INTEGER PRIMARY KEY
             ,   rental_date_id INTEGER
