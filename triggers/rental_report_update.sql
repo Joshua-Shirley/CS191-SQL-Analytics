@@ -61,5 +61,5 @@ ALTER FUNCTION public.rental_report_update()
 CREATE TRIGGER rental_report_update
     AFTER INSERT
     ON public.rental
-    FOR EACH ROW
+    FOR EACH STATEMENT
     EXECUTE FUNCTION public.rental_report_update();
