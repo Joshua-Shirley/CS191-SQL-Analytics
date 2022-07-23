@@ -49,9 +49,9 @@ New Views: report_rental_detail_view, report_pivot_days_hours_percentage
 The detailed section is comprised of two objects: table - report_rental_detail, view - report_rental_detail_view.
 The summary section is the view report_pivot_days_hours_percentage.
 
-<table border="0">
-<tr>
-<td>
+<table border="0" style="vertical-align:top; border: 1px solid white;">
+<tr style="border: 1px solid white;">
+<td style="vertical-align: top; border: 1px solid white;">
     
     
 | Report_Rental_Detail 	|           	|
@@ -71,12 +71,12 @@ The summary section is the view report_pivot_days_hours_percentage.
 
     
 </td>
-<td>
+<td style="vertical-align: top; border: 1px solid white;">
     
     
 | Report_Rental_Detail_View 	|           	|
 |---------------------------	|-----------	|
-| Name                      	| Data Type 	|
+| Name                      	| Type      	|
 | rental_id                 	| INTEGER   	|
 | rental_date_timestamp     	| TIMESTAMP 	|
 | rental_date               	| DATE      	|
@@ -100,32 +100,30 @@ The summary section is the view report_pivot_days_hours_percentage.
 
     
 </td>
-<td>
-
+<td style="vertical-align: top; border: 1px solid white;">
     
-| Report_Pivot_Days_Hours_Percentage 	|              	|
-|------------------------------------	|--------------	|
-| Name                               	| Data Type    	|
-| store_city                         	| TEXT         	|
-| day                                	| TEXT         	|
-| 10 AM                              	| numeric(5,2) 	|
-| 11 AM                              	| numeric(5,2) 	|
-| 12 PM                              	| numeric(5,2) 	|
-| 1 PM                               	| numeric(5,2) 	|
-| 2 PM                               	| numeric(5,2) 	|
-| 3 PM                               	| numeric(5,2) 	|
-| 4 PM                               	| numeric(5,2) 	|
-| 5 PM                               	| numeric(5,2) 	|
-| 6 PM                               	| numeric(5,2) 	|
-| 7 PM                               	| numeric(5,2) 	|
-| 8 PM                               	| numeric(5,2) 	|
-| 9 PM                               	| numeric(5,2) 	|
-| 10 PM                              	| numeric(5,2) 	|
-| 11 PM                              	| numeric(5,2) 	|
-| 12 AM                              	| numeric(5,2) 	|
-| Closed Hours                       	| numeric(5,2) 	|
-        
-        
+| Pivot_Days_Hours 	|              	|
+|------------------	|--------------	|
+| Name             	| Data Type    	|
+| store_city       	| TEXT         	|
+| day              	| TEXT         	|
+| 10 AM            	| numeric(5,2) 	|
+| 11 AM            	| numeric(5,2) 	|
+| 12 PM            	| numeric(5,2) 	|
+| 1 PM             	| numeric(5,2) 	|
+| 2 PM             	| numeric(5,2) 	|
+| 3 PM             	| numeric(5,2) 	|
+| 4 PM             	| numeric(5,2) 	|
+| 5 PM             	| numeric(5,2) 	|
+| 6 PM             	| numeric(5,2) 	|
+| 7 PM             	| numeric(5,2) 	|
+| 8 PM             	| numeric(5,2) 	|
+| 9 PM             	| numeric(5,2) 	|
+| 10 PM            	| numeric(5,2) 	|
+| 11 PM            	| numeric(5,2) 	|
+| 12 AM            	| numeric(5,2) 	|
+| Closed Hours     	| numeric(5,2) 	|
+  
 </td>
 </tr>
 </table>
