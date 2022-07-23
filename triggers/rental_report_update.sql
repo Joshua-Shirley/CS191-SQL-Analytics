@@ -1,16 +1,15 @@
--- FUNCTION: public.rental_report_update()
-
--- DROP FUNCTION IF EXISTS public.rental_report_update();
-
 CREATE OR REPLACE FUNCTION public.rental_report_update()
     RETURNS trigger
     LANGUAGE 'plpgsql'  
 AS $BODY$
 BEGIN
-
-    DELETE FROM report_rental_detail
-        WHERE rental_id = old.rental_id;
         
+    DELETE FROM report_rental_detail
+    WHERE rental_id IN (
+        SELECT rental_id 
+        FROM old_table
+    );
+            
     INSERT INTO report_rental_detail
     ( rental_id,  inventory_id, rental_date_id , rental_time_id, return_date_id, return_time_id , customer_id , staff_id, store_id , category_id, film_id )
     SELECT      
@@ -44,9 +43,9 @@ BEGIN
         LEFT JOIN timefact t2
         ON t2.hour = EXTRACT( HOUR FROM rental.return_date)
         AND t2.minute = EXTRACT( MINUTE FROM rental.return_date)
-        WHERE rental_id NOT IN (
+        WHERE rental_id IN (
             SELECT rental_id 
-            FROM rental                    
+            FROM old_table                   
         )
         order by rental_date; 
 
@@ -59,7 +58,8 @@ ALTER FUNCTION public.rental_report_update()
     OWNER TO postgres;
 
 CREATE TRIGGER rental_report_update
-    AFTER INSERT
+    AFTER UPDATE
     ON public.rental
+    REFERENCING OLD TABLE AS old_table
     FOR EACH STATEMENT
     EXECUTE FUNCTION public.rental_report_update();
