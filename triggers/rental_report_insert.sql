@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION public.log_rental_to_reports_detail()
+CREATE OR REPLACE FUNCTION public.rental_report_insert()
     RETURNS trigger
     LANGUAGE 'plpgsql'       
 AS $BODY$
@@ -48,11 +48,11 @@ BEGIN
 END;
 $BODY$;
 
-CREATE TRIGGER report_update_details
+CREATE TRIGGER rental_report_insert
     AFTER INSERT
     ON rental
     FOR EACH STATEMENT
-    EXECUTE PROCEDURE log_rental_to_reports_detail();
+    EXECUTE PROCEDURE rental_report_insert();
     
-ALTER FUNCTION public.log_rental_to_reports_detail()
+ALTER FUNCTION public.rental_report_insert()
     OWNER TO postgres;
