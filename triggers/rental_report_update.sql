@@ -9,7 +9,7 @@ AS $BODY$
 BEGIN
 
     DELETE FROM report_rental_detail
-        WHERE rental_id = new.rental_id;
+        WHERE rental_id = old.rental_id;
         
     INSERT INTO report_rental_detail
     ( rental_id,  inventory_id, rental_date_id , rental_time_id, return_date_id, return_time_id , customer_id , staff_id, store_id , category_id, film_id )
