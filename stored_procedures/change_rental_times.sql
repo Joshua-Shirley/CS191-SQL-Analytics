@@ -47,9 +47,10 @@ BEGIN
     FROM CTE_Update
     WHERE rental.rental_id = CTE_Update.rental_id;
     
-    call report_rental_complete_update();
+    call report_rental_detail_extract();
 
 END;
 $BODY$;
+
 ALTER PROCEDURE public.change_rental_times()
     OWNER TO postgres;
