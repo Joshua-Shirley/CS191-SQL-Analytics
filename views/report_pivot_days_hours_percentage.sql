@@ -1,3 +1,7 @@
+CREATE VIEW report_pivot_days_hours_percentage
+
+AS
+
 WITH CTE AS (
     SELECT city
     ,   rent_dow
