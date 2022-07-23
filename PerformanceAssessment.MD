@@ -9,6 +9,8 @@ They will be looking to hire more staff quickly.  The managers need to know when
 The managers will schedule the workers on a weekly basis.
 This report helps them determine staffing needs.
 
+Business managers love pivot reports.
+
 Here is an example of that report:
 
 | store_city 	| Day       	| 10:00 AM 	| 11:00 AM 	| 12:00 PM 	| 1:00 PM 	| 2:00 PM 	| 3:00 PM 	| 4:00 PM 	| 5:00 PM 	| 6:00 PM 	| 7:00 PM 	| 8:00 PM 	| 9:00 PM 	| 10:00 PM 	| 11:00 PM 	| 12:00 AM 	|
@@ -310,9 +312,86 @@ Any insert, update, or delete within the rental table would also update the deta
 
 
 ### D. Data Transformation
-Identify one field in the detailed section that will require a custom transformation and explain why it should be transformed.  For example, you might translate a field with a value of 'N' to 'No' and 'Y' to 'Yes'.
+
+Fn_percent_display is used in the summary tables to alter decimals into the more readable percentage values.  This could easily be performed on each row within the query but it makes the select query more readable and reduces code.
+
+        CREATE OR REPLACE FUNCTION public.fn_percent_display(
+            Dividend BIGINT
+        ,   Divisor BIGINT
+        )
+            RETURNS numeric(5,2)
+            LANGUAGE 'plpgsql'       
+        AS $BODY$
+        DECLARE 
+            perc numeric(5,2);
+        BEGIN        
+            SELECT (( Dividend::NUMERIC / DIVISOR ) * 100)::NUMERIC(5,2) INTO perc;
+            RETURN perc;
+        END;
+        $BODY$;
+
+        ALTER FUNCTION public.fn_percent_display(BIGINT,BIGINT)
+            OWNER TO postgres;
+
+There are some more functions I wrote for the datefact table.  There is a stored procedure that updates the date range within the datefact table.  In order to only insert actual dates I needed to create a couple functions that confirm real dates.  Firstly, each month has a set number of days. Fn_days_in_month returns the number of days for a month in a given year.  The function needs to also check if a year is a leap year or not. 
+
+Days In Month Function
+        CREATE OR REPLACE FUNCTION public.fn_days_in_month(
+            year integer,
+            month integer)
+            RETURNS integer
+            LANGUAGE 'plpgsql'          
+        AS $BODY$
+        DECLARE 
+            Days INT;
+        BEGIN
+
+            IF ( month IN (1,3,5,7,8,10,12) ) THEN
+                Days := 31;   
+            ELSEIF ( month IN (4,6,9,11) ) THEN
+                Days := 30;
+            ELSE
+                IF fn_is_leap_year(year) = TRUE THEN
+                    Days := 29;
+                ELSE
+                    Days := 28;
+                END IF;
+            END IF;
+
+            RETURN Days;
+        END;
+        $BODY$;
+
+        ALTER FUNCTION public.fn_days_in_month(integer, integer)
+            OWNER TO postgres;
+            
+Is Leap Year Function
+        CREATE OR REPLACE FUNCTION public.fn_is_leap_year(
+            year integer)
+            RETURNS boolean
+            LANGUAGE 'plpgsql'            
+        AS $BODY$
+        DECLARE 
+            TF BOOLEAN;
+        BEGIN
+
+            IF (Year % 4 = 0 AND Year % 100 <> 0) OR (Year % 400 = 0) THEN
+                TF := TRUE;
+            ELSE
+                TF := FALSE;
+            END IF;
+
+            RETURN TF;
+        END;
+        $BODY$;
+
+        ALTER FUNCTION public.fn_is_leap_yea(integer)
+            OWNER TO postgres;
 
 ### E. SQL Triggers
+
+
+
 
 ### F. Stored Procedure - Refresh detailed and summary tables.
 
