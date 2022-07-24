@@ -581,3 +581,7 @@ Rental Table - Delete Function Trigger and Trigger
 ### F. Stored Procedure - Refresh detailed and summary tables.
 
 #### F1. Explain how the stored procedure can run on a schedule.
+
+### G. Panopto Video
+
+https://wgu.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a87d44b5-d4e3-4f6e-8516-aedc0028aa94
