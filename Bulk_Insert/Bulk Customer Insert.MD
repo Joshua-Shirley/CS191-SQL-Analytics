@@ -180,21 +180,23 @@
 
     -- UPDATE THE C_IN TABLE
 
-    WITH CTE AS (
-        SELECT id
-        ,   customer.customer_id
-        FROM c_in
-        LEFT JOIN customer
-        ON c_in.address_id = customer.address_id
-        AND c_in.email = customer.email
-        AND c_in.last_name = customer.last_name
-        AND c_in.first_name = customer.first_name
-        WHERE c_in.customer_id IS NULL
-    )
-    UPDATE c_in
-    SET customer_id = CTE.customer_id
-    FROM CTE
-    WHERE c_in.id = CTE.id;
+        WITH CTE AS (
+            SELECT customer.customer_id
+            ,   c_in.id
+            /*
+            ,   customer.email
+            ,   customer.address_id
+            ,   c_in.email
+            ,   c_in.address_id
+            */
+            FROM customer
+            FULL JOIN c_in
+            ON customer.email = c_in.email
+        )
+        UPDATE c_in
+        SET customer_id = CTE.customer_id
+        FROM CTE
+        WHERE c_in.id = CTE.id;
 
 ### Step 7 - Random Order Month Stored Procedure<a name="step7"></a>
 
