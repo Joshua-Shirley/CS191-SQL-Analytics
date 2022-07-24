@@ -19,13 +19,13 @@ BEGIN
 
             -- Determine the number of days in month
             -- this determines leap year Febuary as well.
-            md := fn_daysinmonth(y,m);
+            md := fn_days_in_month(y,m);
 
             -- Start the day loop at 1
             d := 1;
             while d <= md loop
 
-                call insertdate(  fn_date_from_parts(y,m,d)  );
+                call insert_date(  fn_date_from_parts(y,m,d)  );
 
                 -- increment the day by 1
                 d := d + 1;
