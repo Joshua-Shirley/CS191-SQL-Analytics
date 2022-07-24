@@ -19,5 +19,5 @@ BEGIN
 END;
 $BODY$;
 
-ALTER FUNCTION public.fn_is_leap_yea(integer)
+ALTER FUNCTION public.fn_is_leap_year(integer)
     OWNER TO postgres;
