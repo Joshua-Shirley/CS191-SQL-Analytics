@@ -1,4 +1,3 @@
-DROP FUNCTION fn_percent_display;
 
 CREATE OR REPLACE FUNCTION public.fn_percent_display(
     Dividend BIGINT
