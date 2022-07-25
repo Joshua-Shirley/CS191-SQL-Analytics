@@ -50,6 +50,7 @@ New Tables:
 * datefact
 * timefact
 * report_rental_detail
+* report_rental_summary
 New Views: 
 * report_rental_detail_view
 * report_pivot_days_hours_percentage
@@ -87,7 +88,7 @@ The summary section is the view report_pivot_days_hours_percentage.
 <td border="0" bordercolor="white" valign="top" style="vertical-align: top; border-color: white;">
     
     
-| Report_Rental_Detail_View 	|           	|
+| Report_Detail              	|           	|
 |---------------------------	|-----------	|
 | Name                      	| Type      	|
 | rental_id                 	| INTEGER   	|
@@ -115,7 +116,7 @@ The summary section is the view report_pivot_days_hours_percentage.
 </td>
 <td border="0"  bordercolor="white"  valign="top" style="vertical-align: top; border-color: white;">
     
-| Pivot_Days_Hours 	|              	|
+| Report Summary 	|              	|
 |------------------	|--------------	|
 | Name             	| Data Type    	|
 | store_city       	| TEXT         	|
