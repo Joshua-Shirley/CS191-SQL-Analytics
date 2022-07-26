@@ -5,7 +5,7 @@ https://github.com/Joshua-Shirley/CS191-SQL-Analytics
 ## Performance Assessment: Advanced Data Management
 
 ### A. Business Report To Generate - Percentage of Sales Pivot Table
-
+#### A1. Describe the data used for the report.
 DVDRental is a new business, and they are understaffed. The managers would like to hire employees but are unsure how many employees they should hire and when to schedule them. I have created a report named report_pivot_days_hours_percentage as a view. The pivot table report helps solve the store managers’ when-to-schedule problem.
 The pivot report breaks down the percentage of daily business into hours. Each store manager can use the historical data for daily and hourly schedules.
 Many business reports are often visualized within date ranges.  
@@ -32,8 +32,7 @@ Here is an example of that report:
 | Woodridge  	| Friday    	| 5.8      	| 1.73     	| 0.87     	| 0.61    	| 0.52    	| 0.69    	| 3.98    	| 12.21   	| 19.31   	| 15.24   	| 15.5    	| 10.3    	| 7.97     	| 4.68     	| 0.61     	|
 | Woodridge  	| Saturday  	| 5.38     	| 2.05     	| 1.11     	| 0.77    	| 0.6     	| 0.94    	| 3.67    	| 11.1    	| 17.68   	| 17.93   	| 14.01   	| 11.19   	| 8.2      	| 4.7      	| 0.68     	|
 
-
-#### A1. Describe the data used for the report.
+#### A2. New Tables - details & summary
 
 The report requires data from these tables.   
 * Rental
@@ -43,14 +42,12 @@ The report requires data from these tables.
 * Store
 * Address
 
-#### A2. New Tables - details & summary
-
 I have added 3 new tables to the database.
 New Tables: 
-* datefact
-* timefact
 * report_rental_detail
 * report_rental_summary
+* datefact
+* timefact
 New Views: 
 * report_rental_detail_view
 * report_pivot_days_hours_percentage
@@ -217,6 +214,7 @@ Many of the business reports that I have created in the past often times use dat
 Date range 4 months ~ 120 days.
 The report output "2005-05-15" transforming month to "May" and the day of the week to "Sunday".
 Postgres EXTRACT functions are fast but using some joined tables is more efficient.
+I chose to use table joins to customize the date day or the week fields.
     
 #### A5. Business uses of the detailed and summary sections.
 
@@ -230,8 +228,12 @@ While working on this project I wrote 4 different summary reports from the detai
 
 #### A6. Refresh frequency - What is relevant to stakeholders.
 
-The Report_Pivot_Days_Hours_Percentage report is available on demand.  The summary report should be available to the stakeholders on a weekly basis.  The managers can schedule employees on a weekly basis.   
+The store managers will require the reports to be updated once a week prior to their task of scheduling.
+The detail and summary reports should be available to the stakeholders on a weekly basis.  The managers can schedule employees on a weekly basis.
+Both tables *report_rental_detail* and *report_rental_summary* are updated by executing a stored procedure *report_update()*.  
 
+I did include a view of the summary table using *Report_Pivot_Days_Hours_Percentage*.  That view is up to date with a select query.  With the small amount of data in the database the view is efficient.
+    
 The data is refreshed through data triggers on the rental table.  The detailed report is updated after each statement insert/update/delete action on the rental table.  I choose "for each statement" triggers to allow for fast transactions in the case of mase data imports.  I tested the insert trigger with stored procedure that allows rental inserts thousands per transaction.  
 
 ### B. SQL Code Tables to hold reports
@@ -256,6 +258,34 @@ Report_Rental_Detail Table
             OWNER to postgres;
 
         CREATE INDEX rental_id ON report_rental_detail(rental_id asc);
+
+Report_Rental_Summary
+
+        CREATE TABLE IF NOT EXISTS public.report_rental_summary
+        (
+            store_city character varying(50) COLLATE pg_catalog."default",
+            day text COLLATE pg_catalog."default",
+            "10 AM" numeric,
+            "11 AM" numeric,
+            "12 PM" numeric,
+            "1 PM" numeric,
+            "2 PM" numeric,
+            "3 PM" numeric,
+            "4 PM" numeric,
+            "5 PM" numeric,
+            "6 PM" numeric,
+            "7 PM" numeric,
+            "8 PM" numeric,
+            "9 PM" numeric,
+            "10 PM" numeric,
+            "11 PM" numeric,
+            "12 AM" numeric,
+            closed numeric
+        )
+
+        ALTER TABLE IF EXISTS public.report_rental_summary
+            OWNER to postgres;
+
 
 DateFact Table
 
